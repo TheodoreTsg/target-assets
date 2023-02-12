@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { TargetAsset } from "../models/target-asset.model";
-import { DashboardServiceService } from "../services/dashboard-service.service";
+import { FileSizeTransformPipe } from "../pipes/file-size-transform.pipe";
+import { DashboardService } from "../services/dashboard.service";
 import { TargetStatus } from "../shared/enums";
 
 @Component({
@@ -12,23 +13,15 @@ import { TargetStatus } from "../shared/enums";
 export class DashboardComponent implements OnInit {
   targetAssets: TargetAsset[] = [];
   isFetching: boolean = false;
-  totalCpusPie: any;
+  totalCpusRamPie: any;
   readyPie: any;
   statusPie: any;
   targetStatus = TargetStatus;
 
-  data: any = {
-    labels: ["Total Cpus"],
-    datasets: [
-      {
-        data: [300],
-        backgroundColor: ["#42A5F5"],
-        hoverBackgroundColor: ["#64B5F6"],
-      },
-    ],
-  };
-
-  constructor(private dashboardService: DashboardServiceService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private fileSizePipe: FileSizeTransformPipe
+  ) {}
 
   ngOnInit(): void {
     this.isFetching = true;
@@ -42,6 +35,7 @@ export class DashboardComponent implements OnInit {
       .pipe(
         tap((targets: TargetAsset[]) => {
           let cpuCounter = 0;
+          let ramCounter = 0;
           let notReadyCounter = 0;
           let readyCounter = 0;
           let runningCounter = 0;
@@ -51,6 +45,7 @@ export class DashboardComponent implements OnInit {
           targets.forEach((element) => {
             console.log(element);
             cpuCounter = cpuCounter + element.cpu;
+            ramCounter = ramCounter + element.ram;
             element.isStartable === false ? notReadyCounter++ : null;
             element.isStartable === true ? readyCounter++ : null;
             element.status === "Running" ? runningCounter++ : null;
@@ -58,14 +53,14 @@ export class DashboardComponent implements OnInit {
             element.status === "MigrationFailed" ? failedCounter++ : null;
             element.status === "Unknown" ? unknownCounter++ : null;
           });
-
-          this.totalCpusPie = {
-            labels: ["Total Cpus"],
+          ramCounter = +this.fileSizePipe.transform(ramCounter, "", false);
+          this.totalCpusRamPie = {
+            labels: ["CPUs", "Ram(GB)"],
             datasets: [
               {
-                data: [cpuCounter],
-                backgroundColor: ["#42A5F5"],
-                hoverBackgroundColor: ["#64B5F6"],
+                data: [cpuCounter, ramCounter],
+                backgroundColor: ["#42A5F5", "#9B59B6"],
+                hoverBackgroundColor: ["#64B5F6", "#C39BD3"],
               },
             ],
           };
@@ -82,8 +77,8 @@ export class DashboardComponent implements OnInit {
           this.statusPie = {
             labels: [
               this.targetStatus.Running,
-              this.targetStatus.Stopped,
               this.targetStatus.MigrationFailed,
+              this.targetStatus.Stopped,
               this.targetStatus.Unknown,
             ],
             datasets: [

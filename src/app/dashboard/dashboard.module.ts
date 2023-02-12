@@ -15,5 +15,6 @@ import {ChartModule} from 'primeng/chart';
 @NgModule({
   declarations: [DashboardComponent, FileSizeTransformPipe, ShortenPipePipe, StatusPipe],
   imports: [CommonModule, DashboardRoutingModule, ButtonModule, CardModule, ChartModule],
+  providers: [FileSizeTransformPipe]
 })
 export class DashboardModule {}

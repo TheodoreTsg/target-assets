@@ -5,7 +5,7 @@ import { TargetAsset } from "../models/target-asset.model";
 @Injectable({
   providedIn: "root",
 })
-export class DashboardServiceService {
+export class DashboardService {
   constructor(private http: HttpClient) {}
 
   getMethod() {

@@ -1,13 +1,13 @@
 <div class="container py-3">
   <div class="row">
-    <div class="col-md">
-      <p-chart type="pie" [data]="totalCpusPie" width="200"></p-chart>
+    <div class="col-md-4">
+      <p-chart type="pie" [data]="totalCpusRamPie" width="200"></p-chart>
     </div>
-    <div class="col-md">
-      <p-chart type="pie" [data]="readyPie" width="200"></p-chart>
-    </div>
-    <div class="col-md">
+    <div class="col-md-4">
       <p-chart type="pie" [data]="statusPie" width="200"></p-chart>
+    </div>
+    <div class="col-md-4">
+      <p-chart type="pie" [data]="readyPie" width="200"></p-chart>
     </div>
   </div>
   <div class="row">
@@ -51,7 +51,7 @@
               <span class="card-label">Ram</span>
               <br />
               <div *ngIf="!isFetching">
-                {{ target.ram | fileSize : " " }}
+                {{ target.ram | fileSize : " " }}MB
               </div>
               <div *ngIf="isFetching">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
