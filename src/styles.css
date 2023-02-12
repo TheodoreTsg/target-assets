@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.container {
+  font-size: small;
+}
+
+.p-card-content .row {
+  margin-top: 5px;
+}
+
+.p-card-header {
+  padding: 0.5rem;
+}
+
+.p-card .p-card-content {
+  padding: unset;
+}
+
+.p-card .p-card-body {
+  padding-top: unset;
+  font-size: smaller;
+}

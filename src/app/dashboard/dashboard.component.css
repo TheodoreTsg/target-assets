@@ -1,0 +1,29 @@
+.big-icon {
+    font-size: xxx-large;
+    display: flex;
+    justify-content: end;
+}
+
+.target-card {
+    margin-top: 0.5rem;
+}
+
+.card-label {
+    color: darkgrey;
+}
+
+.status-running {
+    color: green;
+}
+
+.status-stopped {
+    color: orange;
+}
+
+.status-failed {
+    color: red;
+}
+
+.status-unknown {
+    color: darkgrey;
+}
