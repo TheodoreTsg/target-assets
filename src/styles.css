@@ -21,3 +21,7 @@
   padding-top: unset;
   font-size: smaller;
 }
+
+.p-multiselect-label-container {
+  width: 0;
+}

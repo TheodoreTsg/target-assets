@@ -1,7 +1,7 @@
 .big-icon {
     font-size: xxx-large;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .target-card {
@@ -26,4 +26,8 @@
 
 .status-unknown {
     color: darkgrey;
+}
+
+.search-input, .target-assets {
+    margin-top: 1rem;
 }

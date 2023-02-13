@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { map, tap } from "rxjs/operators";
+import { multiSelect } from "../models/multi-select.model";
 import { TargetAsset } from "../models/target-asset.model";
 import { FileSizeTransformPipe } from "../pipes/file-size-transform.pipe";
 import { DashboardService } from "../services/dashboard.service";
@@ -12,16 +13,34 @@ import { TargetStatus } from "../shared/enums";
 })
 export class DashboardComponent implements OnInit {
   targetAssets: TargetAsset[] = [];
+  cpTargetAssets: TargetAsset[] = [];
+  selectedStatus: any;
+  statuses: any;
   isFetching: boolean = false;
   totalCpusRamPie: any;
   readyPie: any;
   statusPie: any;
+  pieOptions: any = {
+    plugins: {
+      legend: {
+        position: "left",
+      },
+    },
+  };
   targetStatus = TargetStatus;
+  searchText: string = "";
 
   constructor(
     private dashboardService: DashboardService,
     private fileSizePipe: FileSizeTransformPipe
-  ) {}
+  ) {
+    this.statuses = [
+      { name: TargetStatus.Running, code: "Running" },
+      { name: TargetStatus.MigrationFailed, code: "MigrationFailed" },
+      { name: TargetStatus.Stopped, code: "Stopped" },
+      { name: TargetStatus.Unknown, code: "Unknown" },
+    ];
+  }
 
   ngOnInit(): void {
     this.isFetching = true;
@@ -43,7 +62,6 @@ export class DashboardComponent implements OnInit {
           let failedCounter = 0;
           let unknownCounter = 0;
           targets.forEach((element) => {
-            console.log(element);
             cpuCounter = cpuCounter + element.cpu;
             ramCounter = ramCounter + element.ram;
             element.isStartable === false ? notReadyCounter++ : null;
@@ -55,7 +73,7 @@ export class DashboardComponent implements OnInit {
           });
           ramCounter = +this.fileSizePipe.transform(ramCounter, "", false);
           this.totalCpusRamPie = {
-            labels: ["CPUs", "Ram(GB)"],
+            labels: ["CPUs", "Ram (GB)"],
             datasets: [
               {
                 data: [cpuCounter, ramCounter],
@@ -89,12 +107,12 @@ export class DashboardComponent implements OnInit {
                   stoppedCounter,
                   unknownCounter,
                 ],
-                backgroundColor: ["green", "red", "orange", "darkgrey"],
+                backgroundColor: ["green", "red", "orange", "#858585"],
                 hoverBackgroundColor: [
                   "#00A800",
                   "#FF5252",
                   "#FFC65C",
-                  "#858585",
+                  "darkgrey",
                 ],
               },
             ],
@@ -107,8 +125,7 @@ export class DashboardComponent implements OnInit {
         }, 2000);
 
         this.targetAssets = targets;
-
-        console.log(this.targetAssets);
+        this.cpTargetAssets = targets;
       });
   }
 
@@ -129,5 +146,25 @@ export class DashboardComponent implements OnInit {
         break;
     }
     return tempStatus;
+  }
+
+  onSearch(): void {
+    this.cpTargetAssets = this.targetAssets.filter((value) =>
+      value.name.toUpperCase().includes(this.searchText.toLocaleUpperCase())
+    );
+  }
+
+  onStatusChange(): void {
+    if (this.selectedStatus.length === 0) {
+      this.cpTargetAssets = this.targetAssets;
+    } else {
+      const statusArray: string[] = [];
+      this.selectedStatus.forEach((element: multiSelect) => {
+        statusArray.push(element.code);
+      });
+      this.cpTargetAssets = this.targetAssets.filter((value) => {
+        return statusArray.includes(value.status);
+      });
+    }
   }
 }

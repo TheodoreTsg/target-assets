@@ -1,11 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { TargetAsset } from "../models/target-asset.model";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class DashboardService {
+
+  targetAssetsChanged = new Subject<TargetAsset[]>();
+
   constructor(private http: HttpClient) {}
 
   getMethod() {
