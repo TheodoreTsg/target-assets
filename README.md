@@ -2,15 +2,11 @@
 
 ## Introduction
 
-Hello and welcome to your angular coding excercise! During the following process you will be creating a small dashboard using Angular 14.
+Hello and welcome to my angular coding excercise! This is a first try of me after one and a half year inactive using Angular. In this project I will be using version 14.
 
-## Procedure
+### Duration - Challenge
 
-To ensure your privacy, please **download** the Github repository and submit your work in your own Github repository. Once finished, kindly send us the link to the repository for review.
-
-### Duration
-
-You have **5 days** to complete this assessment. But do not spend that much! Spend at **max 4 hours** for the work. It's okay, if you couldn't complete all tasks.
+I have **5 days** to complete this assessment. I have to spend **max 4 hours** in order to complete it and see how many of the tasks I can complete in this timespace.
 
 ## Background
 
@@ -40,12 +36,12 @@ For the purposes of this task, this API will be referred to as the "TargetAsset-
     }
 ```
 
-You will create a simple target assets dashboard given by the above data. The user should be able to see all target assets in a minimal view (show only related data), search/filter target assets and see some nice statistics (e.g. total CPU, total Memory).
+I will create a simple target assets dashboard given by the above data. The user should be able to see all target assets in a minimal view (show only related data), search/filter target assets and see some nice statistics (e.g. total CPU, total Memory).
 
 Following some general advice/tips:
 
-- **Look and feel (UI/UX):** Do some basic UI stylings. But **don't** overdo it! You can also add any UI library you are comfortable with.
-- **State Management:** Apps need to manage state and react to state changes in order to provide an engaging user experience. If you have expirience in state management, don't hesitate to show us!
+- **Look and feel (UI/UX):** I will use **PrimeNG** & **Boostrap**. I will try not to overdo it!
+- **State Management:** Apps need to manage state and react to state changes in order to provide an engaging user experience. No experience on that, but I will try to fill in the gaps later.
 - **Unit testing:** Create a few meaningful unit tests. [Jest](https://jestjs.io/) is preinstalled and ready to use.
 
 ## Tasks
