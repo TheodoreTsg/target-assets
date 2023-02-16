@@ -14,7 +14,7 @@ import { TargetStatus } from "../shared/enums";
 export class DashboardComponent implements OnInit {
   targetAssets: TargetAsset[] = [];
   cpTargetAssets: TargetAsset[] = [];
-  selectedStatus: any;
+  selectedStatus: any = [];
   statuses: any;
   isFetching: boolean = false;
   totalCpusRamPie: any;
@@ -149,22 +149,35 @@ export class DashboardComponent implements OnInit {
   }
 
   onSearch(): void {
-    this.cpTargetAssets = this.targetAssets.filter((value) =>
-      value.name.toUpperCase().includes(this.searchText.toLocaleUpperCase())
-    );
-  }
-
-  onStatusChange(): void {
-    if (this.selectedStatus.length === 0) {
+    if (this.selectedStatus.length === 0 && this.searchText === "") {
       this.cpTargetAssets = this.targetAssets;
     } else {
       const statusArray: string[] = [];
-      this.selectedStatus.forEach((element: multiSelect) => {
-        statusArray.push(element.code);
-      });
-      this.cpTargetAssets = this.targetAssets.filter((value) => {
-        return statusArray.includes(value.status);
-      });
+      if (this.selectedStatus.length !== 0 && this.searchText === "") {
+        // status filter
+        this.selectedStatus.forEach((element: multiSelect) => {
+          statusArray.push(element.code);
+        });
+        this.cpTargetAssets = this.targetAssets.filter((value) => {
+          return statusArray.includes(value.status);
+        });
+      } else if (this.selectedStatus.length === 0 && this.searchText !== "") {
+        // name filter
+        this.cpTargetAssets = this.targetAssets.filter((value) =>
+          value.name.toUpperCase().includes(this.searchText.toLocaleUpperCase())
+        );
+      } else {
+        // filtering both
+        this.selectedStatus.forEach((element: multiSelect) => {
+          statusArray.push(element.code);
+        });
+        this.cpTargetAssets = this.targetAssets.filter((value) =>
+          value.name.toUpperCase().includes(this.searchText.toLocaleUpperCase())
+        );
+        this.cpTargetAssets = this.cpTargetAssets.filter((value) => {
+          return statusArray.includes(value.status);
+        });
+      }
     }
   }
 }
