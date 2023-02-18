@@ -43,7 +43,7 @@
         [(ngModel)]="selectedStatus"
         optionLabel="name"
         [style]="{ border: 'none' }"
-        [panelStyle]="{'width':'300px'}"
+        [panelStyle]="{ width: '300px' }"
         dropdownIcon="pi pi-filter"
         (onChange)="onStatusChange()"
       ></p-multiSelect>
@@ -89,7 +89,7 @@
             <div class="col-md">
               <span class="card-label">Ram</span>
               <br />
-              <div *ngIf="!isFetching">{{ target.ram | fileSize : " " }}MB</div>
+              <div *ngIf="!isFetching">{{ target.ram | fileSize : ' ' }}MB</div>
               <div *ngIf="isFetching">
                 <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
               </div>

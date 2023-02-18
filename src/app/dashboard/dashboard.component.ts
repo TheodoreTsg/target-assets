@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { map, tap } from "rxjs/operators";
-import { multiSelect } from "../models/multi-select.model";
-import { TargetAsset } from "../models/target-asset.model";
-import { FileSizeTransformPipe } from "../pipes/file-size-transform.pipe";
-import { DashboardService } from "../services/dashboard.service";
-import { TargetStatus } from "../shared/enums";
+import { Component, OnInit } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
+import { multiSelect } from '../models/multi-select.model';
+import { TargetAsset } from '../models/target-asset.model';
+import { FileSizeTransformPipe } from '../pipes/file-size-transform.pipe';
+import { DashboardService } from '../services/dashboard.service';
+import { TargetStatus } from '../shared/enums';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "dashboard.component.html",
-  styleUrls: ["dashboard.component.css"],
+  selector: 'app-dashboard',
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   targetAssets: TargetAsset[] = [];
@@ -23,22 +23,22 @@ export class DashboardComponent implements OnInit {
   pieOptions: any = {
     plugins: {
       legend: {
-        position: "left",
+        position: 'left',
       },
     },
   };
   targetStatus = TargetStatus;
-  searchText: string = "";
+  searchText: string = '';
 
   constructor(
     private dashboardService: DashboardService,
     private fileSizePipe: FileSizeTransformPipe
   ) {
     this.statuses = [
-      { name: TargetStatus.Running, code: "Running" },
-      { name: TargetStatus.MigrationFailed, code: "MigrationFailed" },
-      { name: TargetStatus.Stopped, code: "Stopped" },
-      { name: TargetStatus.Unknown, code: "Unknown" },
+      { name: TargetStatus.Running, code: 'Running' },
+      { name: TargetStatus.MigrationFailed, code: 'MigrationFailed' },
+      { name: TargetStatus.Stopped, code: 'Stopped' },
+      { name: TargetStatus.Unknown, code: 'Unknown' },
     ];
   }
 
@@ -66,29 +66,29 @@ export class DashboardComponent implements OnInit {
             ramCounter = ramCounter + element.ram;
             element.isStartable === false ? notReadyCounter++ : null;
             element.isStartable === true ? readyCounter++ : null;
-            element.status === "Running" ? runningCounter++ : null;
-            element.status === "Stopped" ? stoppedCounter++ : null;
-            element.status === "MigrationFailed" ? failedCounter++ : null;
-            element.status === "Unknown" ? unknownCounter++ : null;
+            element.status === 'Running' ? runningCounter++ : null;
+            element.status === 'Stopped' ? stoppedCounter++ : null;
+            element.status === 'MigrationFailed' ? failedCounter++ : null;
+            element.status === 'Unknown' ? unknownCounter++ : null;
           });
-          ramCounter = +this.fileSizePipe.transform(ramCounter, "", false);
+          ramCounter = +this.fileSizePipe.transform(ramCounter, '', false);
           this.totalCpusRamPie = {
-            labels: ["CPUs", "Ram (GB)"],
+            labels: ['CPUs', 'Ram (GB)'],
             datasets: [
               {
                 data: [cpuCounter, ramCounter],
-                backgroundColor: ["#42A5F5", "#9B59B6"],
-                hoverBackgroundColor: ["#64B5F6", "#C39BD3"],
+                backgroundColor: ['#42A5F5', '#9B59B6'],
+                hoverBackgroundColor: ['#64B5F6', '#C39BD3'],
               },
             ],
           };
           this.readyPie = {
-            labels: ["Ready", "Not Ready"],
+            labels: ['Ready', 'Not Ready'],
             datasets: [
               {
                 data: [readyCounter, notReadyCounter],
-                backgroundColor: ["#66BB6A", "#FFA726"],
-                hoverBackgroundColor: ["#81C784", "#FFB74D"],
+                backgroundColor: ['#66BB6A', '#FFA726'],
+                hoverBackgroundColor: ['#81C784', '#FFB74D'],
               },
             ],
           };
@@ -107,12 +107,12 @@ export class DashboardComponent implements OnInit {
                   stoppedCounter,
                   unknownCounter,
                 ],
-                backgroundColor: ["green", "red", "orange", "#858585"],
+                backgroundColor: ['green', 'red', 'orange', '#858585'],
                 hoverBackgroundColor: [
-                  "#00A800",
-                  "#FF5252",
-                  "#FFC65C",
-                  "darkgrey",
+                  '#00A800',
+                  '#FF5252',
+                  '#FFC65C',
+                  'darkgrey',
                 ],
               },
             ],
@@ -130,19 +130,19 @@ export class DashboardComponent implements OnInit {
   }
 
   getHighlight(status: string): string {
-    let tempStatus = "";
+    let tempStatus = '';
     switch (status) {
-      case "Running":
-        tempStatus = "status-running";
+      case 'Running':
+        tempStatus = 'status-running';
         break;
-      case "Stopped":
-        tempStatus = "status-stopped";
+      case 'Stopped':
+        tempStatus = 'status-stopped';
         break;
-      case "MigrationFailed":
-        tempStatus = "status-failed";
+      case 'MigrationFailed':
+        tempStatus = 'status-failed';
         break;
-      case "Unknown":
-        tempStatus = "status-unknown";
+      case 'Unknown':
+        tempStatus = 'status-unknown';
         break;
     }
     return tempStatus;

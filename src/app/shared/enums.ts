@@ -1,6 +1,6 @@
 export enum TargetStatus {
-  Running = "Running",
-  Stopped = "Stopped",
-  MigrationFailed = "Failed",
-  Unknown = "Unknown",
+  Running = 'Running',
+  Stopped = 'Stopped',
+  MigrationFailed = 'Failed',
+  Unknown = 'Unknown',
 }

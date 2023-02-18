@@ -1,21 +1,26 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { DetailComponent } from './dashboard/detail/detail.component';
 
 const appRoutes: Routes = [
   {
-    path: "",
-    redirectTo: "/dashboard",
-    pathMatch: "full",
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
   },
   {
-    path: "dashboard",
+    path: 'dashboard',
     loadChildren: () =>
-      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
-    path: "**",
-    redirectTo: "/dashboard",
-    pathMatch: "full",
+    path: 'dashboard/assets/:id',
+    component: DetailComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
   },
 ];
 

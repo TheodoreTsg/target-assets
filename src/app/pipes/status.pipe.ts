@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { TargetStatus } from "../shared/enums";
+import { Pipe, PipeTransform } from '@angular/core';
+import { TargetStatus } from '../shared/enums';
 
 @Pipe({
-  name: "status",
+  name: 'status',
 })
 export class StatusPipe implements PipeTransform {
   transform(value: string): string {
