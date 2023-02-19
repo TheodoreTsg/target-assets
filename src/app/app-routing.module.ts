@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DetailComponent } from './dashboard/detail/detail.component';
 
 const appRoutes: Routes = [
   {
@@ -12,10 +11,6 @@ const appRoutes: Routes = [
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-  },
-  {
-    path: 'dashboard/assets/:id',
-    component: DetailComponent,
   },
   {
     path: '**',

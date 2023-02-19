@@ -1,1 +1,188 @@
-<p>detail works!</p>
+<div class="container py-3">
+  <div class="row">
+    <p-card styleClass="shadow-2">
+      <ng-template pTemplate="header">
+        <div class="row target-header">
+          <div class="col-8 target-name" *ngIf="targetAsset">
+            {{ targetAsset.name }}
+          </div>
+          <div class="col-8" *ngIf="!targetAsset">
+            <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+          </div>
+          <div class="col-4">
+            <i
+              class="bi bi-pc-display-horizontal big-icon"
+              [ngClass]="getHighlight(targetAsset.status)"
+            ></i>
+          </div>
+        </div>
+      </ng-template>
+      <hr />
+      <ng-template pTemplate="content"> </ng-template>
+      <div class="row">
+        <div class="col-6">
+          <div class="row target-detail">
+            <div class="col-2 target-label">CPU:</div>
+            <div class="col-10" *ngIf="targetAsset.cpu !== null">
+              {{ targetAsset.cpu }}
+            </div>
+            <div class="col-10" *ngIf="targetAsset.cpu === null">-</div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-2 target-label">Ram:</div>
+            <div class="col-10" *ngIf="targetAsset.ram !== null">
+              {{ targetAsset.ram | fileSize : ' ' }}MB
+            </div>
+            <div class="col-10" *ngIf="targetAsset.ram === null">-</div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-2 target-label">Location:</div>
+            <div
+              class="col-10"
+              *ngIf="
+                targetAsset.location !== null && targetAsset.location !== ''
+              "
+            >
+              {{ targetAsset.location }}
+            </div>
+            <div
+              class="col-10"
+              *ngIf="
+                targetAsset.location === null || targetAsset.location === ''
+              "
+            >
+              -
+            </div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-2 target-label">Status:</div>
+            <div
+              class="col-10"
+              *ngIf="targetAsset.status !== null && targetAsset.status !== ''"
+            >
+              {{ targetAsset.status | status }}
+            </div>
+            <div
+              class="col-10"
+              *ngIf="targetAsset.status === null || targetAsset.status === ''"
+            >
+              -
+            </div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-2 target-label">Ready:</div>
+            <div class="col-10">
+              <div *ngIf="targetAsset.isStartable">
+                <i class="bi bi-check2-circle" style="color: green"></i>
+              </div>
+              <div
+                *ngIf="
+                  !targetAsset.isStartable && targetAsset.isStartable !== null
+                "
+              >
+                <i class="bi bi-x-circle" style="color: red"></i>
+              </div>
+              <div *ngIf="targetAsset.isStartable === null">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row target-detail">
+            <div class="col-3 target-label">Owner:</div>
+            <div
+              class="col-9"
+              *ngIf="targetAsset.owner !== null && targetAsset.owner !== ''"
+            >
+              {{ targetAsset.owner }}
+            </div>
+            <div
+              class="col-9"
+              *ngIf="targetAsset.owner === null || targetAsset.owner === ''"
+            >
+              -
+            </div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-3 target-label">Parent Target:</div>
+            <div
+              class="col-9"
+              *ngIf="
+                targetAsset.parentId !== null && targetAsset.parentId !== 0
+              "
+            >
+              <button
+                pButton
+                pRipple
+                type="button"
+                label="{{ parentTargetName }}"
+                class="p-button-link"
+                (click)="onNavigateToParent()"
+              ></button>
+            </div>
+            <div
+              class="col-9"
+              *ngIf="
+                targetAsset.parentId === null || targetAsset.parentId === 0
+              "
+            >
+              -
+            </div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-3 target-label">Created By:</div>
+            <div
+              class="col-9"
+              *ngIf="
+                targetAsset.createdBy !== null && targetAsset.createdBy !== ''
+              "
+            >
+              {{ targetAsset.createdBy }}
+            </div>
+            <div
+              class="col-9"
+              *ngIf="
+                targetAsset.createdBy === null || targetAsset.createdBy === ''
+              "
+            >
+              -
+            </div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-3 target-label">Create At:</div>
+            <div
+              class="col-9"
+              *ngIf="
+                targetAsset.createdAt !== null && targetAsset.createdAt !== ''
+              "
+            >
+              {{ targetAsset.createdAt | date : 'medium' }}
+            </div>
+            <div
+              class="col-9"
+              *ngIf="
+                targetAsset.createdAt === null || targetAsset.createdAt === ''
+              "
+            >
+              -
+            </div>
+          </div>
+          <div class="row target-detail">
+            <div class="col-3 target-label">Tags:</div>
+            <div
+              class="col-9"
+              *ngIf="targetAsset.tags !== null && targetAsset.tags.length !== 0"
+            >
+              {{ targetAsset.tags }}
+            </div>
+            <div
+              class="col-9"
+              *ngIf="targetAsset.tags === null || targetAsset.tags.length === 0"
+            >
+              -
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

@@ -32,3 +32,35 @@
 .target-assets {
   margin-top: 1rem;
 }
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: royalblue;
+  overflow: hidden;
+  background: linear-gradient(
+    to right,
+    midnightblue,
+    midnightblue 50%,
+    royalblue 50%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 275ms ease;
+  text-decoration: none;
+}
+
+a:hover {
+  background-position: 0 100%;
+}
+
+a i {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}

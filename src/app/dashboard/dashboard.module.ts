@@ -10,11 +10,13 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ChartModule } from 'primeng/chart';
+import { SidebarModule } from 'primeng/sidebar';
 
 import { FileSizeTransformPipe } from '../pipes/file-size-transform.pipe';
 import { ShortenPipePipe } from '../pipes/shorten-pipe.pipe';
 import { StatusPipe } from '../pipes/status.pipe';
 import { DetailComponent } from './detail/detail.component';
+import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { DetailComponent } from './detail/detail.component';
     ShortenPipePipe,
     StatusPipe,
     DetailComponent,
+    MainDashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,7 @@ import { DetailComponent } from './detail/detail.component';
     InputTextModule,
     FormsModule,
     MultiSelectModule,
+    SidebarModule,
   ],
   providers: [FileSizeTransformPipe],
 })
