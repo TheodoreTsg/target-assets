@@ -1,0 +1,41 @@
+.status-running {
+  color: green;
+}
+
+.status-stopped {
+  color: orange;
+}
+
+.status-failed {
+  color: red;
+}
+
+.status-unknown {
+  color: darkgrey;
+}
+
+.target-label {
+  color: darkgrey;
+}
+
+.target-detail {
+  margin-top: 2rem;
+  font-size: large;
+  display: flex;
+  align-items: center;
+}
+
+.big-icon {
+  font-size: xxx-large;
+}
+
+.target-name {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.target-header {
+  padding-left: 1rem;
+  align-items: center;
+  display: flex;
+}

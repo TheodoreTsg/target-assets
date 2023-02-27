@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "app.component.html",
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnInit {
-  title = "angular-coding-interview";
+  title = 'angular-coding-interview';
 
   constructor() {}
 

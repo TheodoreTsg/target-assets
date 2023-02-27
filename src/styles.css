@@ -25,3 +25,11 @@
 .p-multiselect-label-container {
   width: 0;
 }
+
+.p-card-footer {
+  text-align: center;
+}
+
+.p-button-link {
+  padding: 0;
+}
