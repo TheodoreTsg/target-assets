@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TargetAsset } from '../models/target-asset.model';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,9 @@ export class DashboardService {
       .pipe(
         map((targets: TargetAsset[]) => {
           return targets.filter((x) => x != null);
+        }),
+        tap((targets: TargetAsset[]) => {
+          this.setTargets(targets);
         })
       );
   }

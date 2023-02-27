@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TargetsResolverService } from '../services/targets-resolver.service';
 import { DashboardComponent } from './dashboard.component';
 import { DetailComponent } from './detail/detail.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
       {
         path: 'assets/:id',
         component: DetailComponent,
+        resolve: [TargetsResolverService],
       },
     ],
   },

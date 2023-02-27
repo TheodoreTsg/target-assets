@@ -17,6 +17,7 @@ import { ShortenPipePipe } from '../pipes/shorten-pipe.pipe';
 import { StatusPipe } from '../pipes/status.pipe';
 import { DetailComponent } from './detail/detail.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
+import { TargetsResolverService } from '../services/targets-resolver.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,6 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
     MultiSelectModule,
     SidebarModule,
   ],
-  providers: [FileSizeTransformPipe],
+  providers: [FileSizeTransformPipe, TargetsResolverService],
 })
 export class DashboardModule {}
